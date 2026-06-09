@@ -1,9 +1,7 @@
-<div class="max-w-md pt-4 text-left text-sm leading-relaxed text-black/60">
+<div class="max-w-md pt-4 text-left text-sm leading-relaxed font-light text-black/60">
 	<p>
-		Justin Gene Karl is a photographer working primarily in the street, where he's drawn to the
-		unscripted geometry of cities and the people moving through them. That same eye for
-		proportion and negative space has carried over into an ongoing study of architecture and
-		furniture design, two disciplines he sees less as separate interests than as the same
-		question asked in different materials: what makes a thing, or a moment, feel considered.
+		Justin is a photographer based wherever the next trip takes him. He likes cities, quiet
+		corners, and the way light falls when nobody planned it. A viewfinder has a way of making
+		the ordinary feel worth stopping for.
 	</p>
 </div>
