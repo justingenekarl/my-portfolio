@@ -3,9 +3,9 @@
 
 	const images = [
 		{
-			file: 'tokyo-shibuya-neon.jpg',
-			alt: 'Vibrant pink and orange neon signs lighting up a street in Shibuya, Tokyo',
-			ratio: '2 / 3'
+			file: 'chongqing-hongyadong.jpg',
+			alt: 'Illuminated buildings and traffic at night near Hongya Cave, Chongqing',
+			ratio: '3 / 2'
 		},
 		{
 			file: 'fuji-lake.jpg',
@@ -23,9 +23,9 @@
 			ratio: '3 / 4'
 		},
 		{
-			file: 'paris-eiffel.jpg',
-			alt: 'People walking on the street near the Eiffel Tower, Paris',
-			ratio: '3 / 2'
+			file: 'copenhagen-nyhavn.jpg',
+			alt: 'Colorful waterfront buildings lit up at night in Nyhavn, Copenhagen',
+			ratio: '2 / 3'
 		},
 		{
 			file: 'osaka-alley.jpg',
@@ -43,9 +43,9 @@
 			ratio: '2 / 3'
 		},
 		{
-			file: 'prague-street.jpg',
-			alt: 'Cobblestone street in Old Town, Prague',
-			ratio: '3 / 4'
+			file: 'vancouver-chinatown.jpg',
+			alt: 'Busy Chinatown street at night with vibrant neon glow, Vancouver',
+			ratio: '2 / 3'
 		},
 		{
 			file: 'tokyo-vending.jpg',
