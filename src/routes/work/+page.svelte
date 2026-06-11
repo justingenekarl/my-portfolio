@@ -2,26 +2,54 @@
 	import { onMount } from 'svelte';
 
 	const images = [
-		{ file: 'tokyo-alley.jpg', alt: 'Narrow neon-lit alley, Shinjuku, Tokyo', ratio: '2 / 3' },
 		{
-			file: 'tokyo-crossing.jpg',
-			alt: 'Pedestrians crossing in the rain, Shibuya, Tokyo',
-			ratio: '3 / 2'
-		},
-		{ file: 'amsterdam-canal.jpg', alt: 'Bicycles along a quiet canal, Amsterdam', ratio: '3 / 2' },
-		{
-			file: 'amsterdam-morning.jpg',
-			alt: 'Early morning light on a cobblestone street, Amsterdam',
+			file: 'tokyo-shibuya-neon.jpg',
+			alt: 'Vibrant pink and orange neon signs lighting up a street in Shibuya, Tokyo',
 			ratio: '2 / 3'
 		},
 		{
-			file: 'coffee-window-seat.jpg',
-			alt: 'Window-seat portrait in a corner coffee shop',
-			ratio: '4 / 5'
+			file: 'fuji-lake.jpg',
+			alt: 'Snow-capped Mount Fuji rising above clouds over a lake',
+			ratio: '3 / 2'
 		},
 		{
-			file: 'coffee-counter.jpg',
-			alt: 'Steam rising over the counter at a small espresso bar',
+			file: 'osaka-dotonbori.jpg',
+			alt: 'Neon signs lining the street in Dotonbori, Osaka',
+			ratio: '2 / 3'
+		},
+		{
+			file: 'tokyo-station.jpg',
+			alt: 'Train station platform, Tokyo',
+			ratio: '3 / 4'
+		},
+		{
+			file: 'paris-eiffel.jpg',
+			alt: 'People walking on the street near the Eiffel Tower, Paris',
+			ratio: '3 / 2'
+		},
+		{
+			file: 'osaka-alley.jpg',
+			alt: 'Narrow alley lined with signs, Osaka',
+			ratio: '2 / 3'
+		},
+		{
+			file: 'kyoto-bamboo.jpg',
+			alt: 'Path through the Arashiyama bamboo forest, Kyoto',
+			ratio: '2 / 3'
+		},
+		{
+			file: 'tokyo-rain.jpg',
+			alt: 'Woman walking with an umbrella in the rain, Shibuya, Tokyo',
+			ratio: '2 / 3'
+		},
+		{
+			file: 'prague-street.jpg',
+			alt: 'Cobblestone street in Old Town, Prague',
+			ratio: '3 / 4'
+		},
+		{
+			file: 'tokyo-vending.jpg',
+			alt: 'Glowing vending machine on a street corner at night, Yurakucho, Tokyo',
 			ratio: '3 / 2'
 		}
 	];
@@ -33,20 +61,13 @@
 
 	function syncIndexFromScroll() {
 		if (!track) return;
-		const maxScroll = track.scrollWidth - track.clientWidth;
-		if (track.scrollLeft >= maxScroll - 1) {
-			currentIndex = images.length - 1;
-			return;
-		}
-		if (track.scrollLeft <= 1) {
-			currentIndex = 0;
-			return;
-		}
+		const viewportCenter = track.scrollLeft + track.clientWidth / 2;
 		let closest = 0;
 		let closestDist = Infinity;
 		imageEls.forEach((el, i) => {
 			if (!el) return;
-			const dist = Math.abs(el.offsetLeft - track.scrollLeft);
+			const elCenter = el.offsetLeft + el.offsetWidth / 2;
+			const dist = Math.abs(elCenter - viewportCenter);
 			if (dist < closestDist) {
 				closestDist = dist;
 				closest = i;
@@ -81,13 +102,17 @@
 		updateFades();
 	}
 
-	function scrollToIndex(i: number) {
+	function centerOffset(el: HTMLImageElement) {
+		return el.offsetLeft + el.offsetWidth / 2 - track.clientWidth / 2;
+	}
+
+	function scrollToIndex(i: number, behavior: ScrollBehavior = 'smooth') {
 		const clamped = Math.max(0, Math.min(images.length - 1, i));
-		currentIndex = clamped;
-		const el = imageEls[clamped];
-		if (el && track) {
-			track.scrollTo({ left: el.offsetLeft, behavior: 'smooth' });
+		const toEl = imageEls[clamped];
+		if (toEl && track) {
+			track.scrollTo({ left: centerOffset(toEl), behavior });
 		}
+		currentIndex = clamped;
 	}
 
 	function handleLeftClick() {
@@ -109,6 +134,7 @@
 	}
 
 	onMount(() => {
+		scrollToIndex(0, 'instant');
 		updateFades();
 	});
 </script>
@@ -125,9 +151,10 @@
 				src={`/images/${image.file}`}
 				alt={image.alt}
 				style="aspect-ratio: {image.ratio};"
-				class="h-[80vh] w-auto flex-shrink-0 border border-black/5 object-cover grayscale contrast-110 transition-opacity duration-300 ease-out"
+				class="h-[80vh] w-auto flex-shrink-0 border border-black/5 object-cover transition-opacity duration-300 ease-out [filter:sepia(0.18)_saturate(1.2)_contrast(0.92)_brightness(1.05)]"
 			/>
 		{/each}
+		<div class="w-[50vw] flex-shrink-0" aria-hidden="true"></div>
 	</div>
 
 	{#if canScrollLeft}
